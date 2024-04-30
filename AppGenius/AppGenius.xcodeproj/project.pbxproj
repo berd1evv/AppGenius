@@ -65,6 +65,9 @@
 		A95752152BDF7D9700E8EDA9 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95752142BDF7D9700E8EDA9 /* Project.swift */; };
 		A95752172BDF933900E8EDA9 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95752162BDF933900E8EDA9 /* Task.swift */; };
 		A957521A2BE0C44000E8EDA9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95752192BE0C44000E8EDA9 /* SettingsView.swift */; };
+		A9BDF5122BE0E72E00D20CCC /* ProjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BDF5112BE0E72E00D20CCC /* ProjectViewModel.swift */; };
+		A9BDF5152BE0E7A500D20CCC /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BDF5142BE0E7A500D20CCC /* String+Extension.swift */; };
+		A9BDF5172BE0EA1E00D20CCC /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BDF5162BE0EA1E00D20CCC /* TodayViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +99,9 @@
 		A95752142BDF7D9700E8EDA9 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		A95752162BDF933900E8EDA9 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		A95752192BE0C44000E8EDA9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A9BDF5112BE0E72E00D20CCC /* ProjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewModel.swift; sourceTree = "<group>"; };
+		A9BDF5142BE0E7A500D20CCC /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		A9BDF5162BE0EA1E00D20CCC /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +165,7 @@
 		A93210B92BDE239600EFAE6B /* AppGenius */ = {
 			isa = PBXGroup;
 			children = (
+				A9BDF5132BE0E79600D20CCC /* Extensions */,
 				A93211282BDE3D9100EFAE6B /* GoogleService-Info.plist */,
 				A93211102BDE301600EFAE6B /* Services */,
 				A932112A2BDEDAA600EFAE6B /* Modules */,
@@ -273,6 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				A932112F2BDEE1A600EFAE6B /* TodayView.swift */,
+				A9BDF5162BE0EA1E00D20CCC /* TodayViewModel.swift */,
 			);
 			path = Today;
 			sourceTree = "<group>";
@@ -289,6 +297,7 @@
 			isa = PBXGroup;
 			children = (
 				A93211352BDEE6E300EFAE6B /* ProjectView.swift */,
+				A9BDF5112BE0E72E00D20CCC /* ProjectViewModel.swift */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -308,6 +317,14 @@
 				A95752192BE0C44000E8EDA9 /* SettingsView.swift */,
 			);
 			path = Gear;
+			sourceTree = "<group>";
+		};
+		A9BDF5132BE0E79600D20CCC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A9BDF5142BE0E7A500D20CCC /* String+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -422,7 +439,9 @@
 				A93211222BDE383600EFAE6B /* HandleResponse.swift in Sources */,
 				A932111E2BDE36CC00EFAE6B /* EndPoints.swift in Sources */,
 				A932112D2BDEDAC400EFAE6B /* InboxView.swift in Sources */,
+				A9BDF5122BE0E72E00D20CCC /* ProjectViewModel.swift in Sources */,
 				A95752172BDF933900E8EDA9 /* Task.swift in Sources */,
+				A9BDF5152BE0E7A500D20CCC /* String+Extension.swift in Sources */,
 				A93211362BDEE6E300EFAE6B /* ProjectView.swift in Sources */,
 				A93211182BDE35A900EFAE6B /* Storage.swift in Sources */,
 				A93210C92BDE289E00EFAE6B /* AppDelegate.swift in Sources */,
@@ -433,6 +452,7 @@
 				A93211152BDE341500EFAE6B /* WebKitView.swift in Sources */,
 				A93211332BDEE31A00EFAE6B /* BrowseView.swift in Sources */,
 				A95752112BDF7C6300E8EDA9 /* AppState.swift in Sources */,
+				A9BDF5172BE0EA1E00D20CCC /* TodayViewModel.swift in Sources */,
 				A93210BD2BDE239600EFAE6B /* ContentView.swift in Sources */,
 				A93211202BDE380300EFAE6B /* AuthNetworkManager.swift in Sources */,
 				A93211032BDE2E5800EFAE6B /* AuthView.swift in Sources */,

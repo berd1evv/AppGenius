@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ProjectView: View {
-    var projectTitle: String
+    var project: Project
+    @StateObject private var viewModel: ProjectViewModel = ProjectViewModel()
     @State private var todoItems = [
         TodoItem(title: "Task 1", description: "Description for task 1", isCompleted: false),
         TodoItem(title: "Task 2", description: nil, isCompleted: true),
@@ -16,23 +17,28 @@ struct ProjectView: View {
     ]
     
     var body: some View {
-        List(todoItems) { item in
-            HStack {
-                Image(systemName: item.isCompleted ? "circle.fill" : "circle")
-                    .frame(width: 20, height: 20)
-                VStack(alignment: .leading) {
-                    Text(item.title)
-                        .font(.headline)
-                    if let description = item.description {
-                        Text(description)
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
+        List {
+            ForEach(viewModel.project.indices, id: \.self) { index in
+                HStack {
+                    Image(systemName: "circle")
+                        .frame(width: 20, height: 20)
+                    VStack(alignment: .leading) {
+                        Text(viewModel.project[index].content.cleanedText())
+                            .font(.headline)
+                        if !viewModel.project[index].description.isEmpty {
+                            Text(viewModel.project[index].description)
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                        }
                     }
+                    Spacer()
                 }
-                Spacer()
             }
         }
-        .navigationTitle(projectTitle)
+        .navigationTitle(project.name)
         .navigationBarTitleDisplayMode(.large)
+        .onAppear {
+            viewModel.getTask(projectId: project.id)
+        }
     }
 }

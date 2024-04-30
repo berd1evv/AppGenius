@@ -11,7 +11,7 @@ import Alamofire
 
 protocol MainNetworkManagerProtocol{
     func getProjects(onSuccess: @escaping ([Project]) -> Void, onError: @escaping (APIError) -> Void)
-    func getTasks(projectId: String?, sectionId: String?, onSuccess: @escaping ([Task]) -> Void, onError: @escaping (APIError) -> Void)
+    func getTasks(projectId: String?, sectionId: String?, filter: String?, onSuccess: @escaping ([Task]) -> Void, onError: @escaping (APIError) -> Void)
 }
 
 class MainNetworkManager{
@@ -32,8 +32,8 @@ extension MainNetworkManager: MainNetworkManagerProtocol{
         }
     }
     
-    func getTasks(projectId: String?, sectionId: String?, onSuccess: @escaping ([Task]) -> Void, onError: @escaping (APIError) -> Void) {
-        provider.request(.getTasks(projectId: projectId, sectionId: sectionId)) { result in
+    func getTasks(projectId: String?, sectionId: String?, filter: String?, onSuccess: @escaping ([Task]) -> Void, onError: @escaping (APIError) -> Void) {
+        provider.request(.getTasks(projectId: projectId, sectionId: sectionId, filter: filter)) { result in
             self.handleResponse.handleResponse(result: result, onSuccess: onSuccess, onError: onError)
         }
     }

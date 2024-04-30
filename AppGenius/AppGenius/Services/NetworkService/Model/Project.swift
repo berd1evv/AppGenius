@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct Project: Codable{
+struct Project: Codable, Identifiable{
     let id: String
     let name: String
     let order: Int
     let isInbox: Bool
     let isFavorite: Bool
     let parentId: String?
-    
+    var children: [Project]?
     
     enum CodingKeys: String, CodingKey{
         case id
@@ -32,5 +32,15 @@ struct Project: Codable{
         isInbox = try values.decode(Bool.self, forKey: .isInbox)
         isFavorite = try values.decode(Bool.self, forKey: .isFavorite)
         parentId = try values.decodeIfPresent(String.self, forKey: .parentId)
+    }
+    
+    init() {
+        id = ""
+        name = ""
+        order = 0
+        isInbox = false
+        isFavorite = false
+        parentId = nil
+        children = nil
     }
 }

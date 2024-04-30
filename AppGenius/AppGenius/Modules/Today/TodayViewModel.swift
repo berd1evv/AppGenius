@@ -1,27 +1,28 @@
 //
-//  InboxViewModel.swift
+//  TodayViewModel.swift
 //  AppGenius
 //
-//  Created by Eldiiar on 29/4/24.
+//  Created by Eldiiar on 30/4/24.
 //
 
-import SwiftUI
+import Foundation
 
-class InboxViewModel: ObservableObject {
+class TodayViewModel: ObservableObject {
     
-    @Published var inboxTasks = [Task]()
+    @Published var todaysTasks = [Task]()
     
     private var networkManager: MainNetworkManagerProtocol
     
     init(networkManager: MainNetworkManagerProtocol = MainNetworkManager.shared){
         self.networkManager = networkManager
+        self.getTasksForToday()
     }
     
     
-    func getTask(projectId: String) {
-        networkManager.getTasks(projectId: projectId, sectionId: nil, filter: nil) { response in
+    func getTasksForToday() {
+        networkManager.getTasks(projectId: nil, sectionId: nil, filter: "today|overdue") { response in
             print("Tasks", response)
-            self.inboxTasks = response
+            self.todaysTasks = response
         } onError: { error in
             print(error.localizedDescription)
         }

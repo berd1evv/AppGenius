@@ -25,7 +25,7 @@ struct InboxView: View {
                     Image(systemName: "circle")
                         .frame(width: 20, height: 20)
                     VStack(alignment: .leading) {
-                        Text(cleanedText(viewModel.inboxTasks[index].content))
+                        Text(viewModel.inboxTasks[index].content.cleanedText())
                             .font(.headline)
                         if !viewModel.inboxTasks[index].description.isEmpty {
                             Text(viewModel.inboxTasks[index].description)
@@ -44,16 +44,6 @@ struct InboxView: View {
         }
         .navigationTitle("Inbox")
         .navigationBarTitleDisplayMode(.large)
-    }
-    
-    func cleanedText(_ text: String) -> String {
-        var cleanedText = text
-        // Remove content inside parentheses including the parentheses themselves
-        cleanedText = cleanedText.replacingOccurrences(of: "\\(.*?\\)", with: "", options: .regularExpression)
-        // Remove square brackets and the content inside them
-        cleanedText = cleanedText.replacingOccurrences(of: "[", with: "")
-        cleanedText = cleanedText.replacingOccurrences(of: "]", with: "")
-        return cleanedText
     }
 }
 

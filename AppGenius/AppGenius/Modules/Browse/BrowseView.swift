@@ -32,41 +32,28 @@ struct CustomDisclosureGroupStyle: DisclosureGroupStyle {
 }
 
 struct BrowseView: View {
+    @EnvironmentObject var appState: AppState
     var data = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"]
     @State private var isExpanded = false
     @State private var buttonTapped = false
-    @State private var selectedProject = ""
+    @State private var selectedProject: Project = Project()
     @State private var showSettings = false
     
     var body: some View {
         List {
-            DisclosureGroup(isExpanded: $isExpanded) {
-                ForEach(data, id: \.self){ listItem in
-                    HStack {
-                        Text("Sub Item \(listItem)")
-                        Spacer()
-                    }
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        selectedProject = "Sub Item \(listItem)"
-                        buttonTapped.toggle()
-                    }
-                }
-            } label: {
+            
+            OutlineGroup(appState.projects, children: \.children) { project in
                 HStack {
                     Image(systemName: "number")
-                    Text("Home 🏡")
+                    Text(project.name)
                     Spacer()
                 }
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    selectedProject = "Home 🏡"
+                    selectedProject = project
                     buttonTapped.toggle()
                 }
             }
-//            .disclosureGroupStyle(CustomDisclosureGroupStyle(showsDisclosureIndicator: true))
-            
-            
             
             HStack {
                 Image(systemName: "pencil")
@@ -89,7 +76,7 @@ struct BrowseView: View {
             SettingsView()
         })
         .navigationDestination(isPresented: $buttonTapped) {
-            ProjectView(projectTitle: selectedProject)
+            ProjectView(project: selectedProject)
         }
     }
 }

@@ -12,7 +12,7 @@ import Alamofire
 
 enum MainService{
     case getProjects
-    case getTasks(projectId: String?, sectionId: String?)
+    case getTasks(projectId: String?, sectionId: String?, filter: String?)
 }
 
 extension MainService: TargetType{
@@ -37,13 +37,16 @@ extension MainService: TargetType{
     
     var task: Moya.Task {
         switch self{
-        case .getTasks(let projectId, let sectionId):
+        case .getTasks(let projectId, let sectionId, let filter):
             var params = [String:Any]()
             if let projectId = projectId {
                 params["project_id"] = projectId
             }
             if let sectionId = sectionId {
                 params["section_id"] = sectionId
+            }
+            if let filter = filter {
+                params["filter"] = filter
             }
             return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
         default:
