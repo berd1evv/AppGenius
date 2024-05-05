@@ -10,6 +10,7 @@ import SwiftUI
 class AppState: ObservableObject {
     
     @Published var projects = [Project]()
+    @Published var inboxTasks = [Task]()
     
     private var networkManager: MainNetworkManagerProtocol
     
@@ -19,7 +20,20 @@ class AppState: ObservableObject {
     
     func getProjects() {
         networkManager.getProjects { response in
-            self.projects = self.makeHierarchy(from: response)
+            if let project = response.first(where: { $0.isInbox}) {
+                self.getInboxTask(projectId: project.id)
+            }
+            self.projects = self.makeHierarchy(from: response).filter { !$0.isInbox}
+        } onError: { error in
+            print(error.localizedDescription)
+        }
+
+    }
+    
+    func getInboxTask(projectId: String) {
+        networkManager.getTasks(projectId: projectId, sectionId: nil, filter: nil) { response in
+            print("Tasks", response)
+            self.inboxTasks = response
         } onError: { error in
             print(error.localizedDescription)
         }

@@ -65,9 +65,13 @@
 		A95752152BDF7D9700E8EDA9 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95752142BDF7D9700E8EDA9 /* Project.swift */; };
 		A95752172BDF933900E8EDA9 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95752162BDF933900E8EDA9 /* Task.swift */; };
 		A957521A2BE0C44000E8EDA9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95752192BE0C44000E8EDA9 /* SettingsView.swift */; };
+		A98395332BE7E8F8007315BC /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98395322BE7E8F8007315BC /* NewTaskView.swift */; };
+		A98395362BE7F2F6007315BC /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98395352BE7F2F6007315BC /* EditTaskView.swift */; };
 		A9BDF5122BE0E72E00D20CCC /* ProjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BDF5112BE0E72E00D20CCC /* ProjectViewModel.swift */; };
 		A9BDF5152BE0E7A500D20CCC /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BDF5142BE0E7A500D20CCC /* String+Extension.swift */; };
 		A9BDF5172BE0EA1E00D20CCC /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BDF5162BE0EA1E00D20CCC /* TodayViewModel.swift */; };
+		A9BDF51C2BE0FB8800D20CCC /* ManageProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BDF51B2BE0FB8800D20CCC /* ManageProjectView.swift */; };
+		A9BDF51E2BE23E2C00D20CCC /* Sections.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BDF51D2BE23E2C00D20CCC /* Sections.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,9 +103,13 @@
 		A95752142BDF7D9700E8EDA9 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		A95752162BDF933900E8EDA9 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		A95752192BE0C44000E8EDA9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A98395322BE7E8F8007315BC /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
+		A98395352BE7F2F6007315BC /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
 		A9BDF5112BE0E72E00D20CCC /* ProjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewModel.swift; sourceTree = "<group>"; };
 		A9BDF5142BE0E7A500D20CCC /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		A9BDF5162BE0EA1E00D20CCC /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
+		A9BDF51B2BE0FB8800D20CCC /* ManageProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageProjectView.swift; sourceTree = "<group>"; };
+		A9BDF51D2BE23E2C00D20CCC /* Sections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sections.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +257,7 @@
 				A93211262BDE394C00EFAE6B /* SignInResponse.swift */,
 				A95752142BDF7D9700E8EDA9 /* Project.swift */,
 				A95752162BDF933900E8EDA9 /* Task.swift */,
+				A9BDF51D2BE23E2C00D20CCC /* Sections.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -256,6 +265,9 @@
 		A932112A2BDEDAA600EFAE6B /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				A98395342BE7F2E7007315BC /* Edit Task */,
+				A98395312BE7E8E7007315BC /* New Task */,
+				A9BDF5182BE0FB6600D20CCC /* Manage Project */,
 				A95752182BE0C42E00E8EDA9 /* Gear */,
 				A93211342BDEE6D300EFAE6B /* Project */,
 				A93211312BDEE30D00EFAE6B /* Browse */,
@@ -319,12 +331,36 @@
 			path = Gear;
 			sourceTree = "<group>";
 		};
+		A98395312BE7E8E7007315BC /* New Task */ = {
+			isa = PBXGroup;
+			children = (
+				A98395322BE7E8F8007315BC /* NewTaskView.swift */,
+			);
+			path = "New Task";
+			sourceTree = "<group>";
+		};
+		A98395342BE7F2E7007315BC /* Edit Task */ = {
+			isa = PBXGroup;
+			children = (
+				A98395352BE7F2F6007315BC /* EditTaskView.swift */,
+			);
+			path = "Edit Task";
+			sourceTree = "<group>";
+		};
 		A9BDF5132BE0E79600D20CCC /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				A9BDF5142BE0E7A500D20CCC /* String+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A9BDF5182BE0FB6600D20CCC /* Manage Project */ = {
+			isa = PBXGroup;
+			children = (
+				A9BDF51B2BE0FB8800D20CCC /* ManageProjectView.swift */,
+			);
+			path = "Manage Project";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -446,19 +482,23 @@
 				A93211182BDE35A900EFAE6B /* Storage.swift in Sources */,
 				A93210C92BDE289E00EFAE6B /* AppDelegate.swift in Sources */,
 				A95752152BDF7D9700E8EDA9 /* Project.swift in Sources */,
+				A9BDF51E2BE23E2C00D20CCC /* Sections.swift in Sources */,
 				A957521A2BE0C44000E8EDA9 /* SettingsView.swift in Sources */,
 				A957520F2BDF7BAC00E8EDA9 /* MainService.swift in Sources */,
+				A9BDF51C2BE0FB8800D20CCC /* ManageProjectView.swift in Sources */,
 				A93211242BDE388800EFAE6B /* APIError.swift in Sources */,
 				A93211152BDE341500EFAE6B /* WebKitView.swift in Sources */,
 				A93211332BDEE31A00EFAE6B /* BrowseView.swift in Sources */,
 				A95752112BDF7C6300E8EDA9 /* AppState.swift in Sources */,
 				A9BDF5172BE0EA1E00D20CCC /* TodayViewModel.swift in Sources */,
+				A98395362BE7F2F6007315BC /* EditTaskView.swift in Sources */,
 				A93210BD2BDE239600EFAE6B /* ContentView.swift in Sources */,
 				A93211202BDE380300EFAE6B /* AuthNetworkManager.swift in Sources */,
 				A93211032BDE2E5800EFAE6B /* AuthView.swift in Sources */,
 				A93210BB2BDE239600EFAE6B /* AppGeniusApp.swift in Sources */,
 				A93211272BDE394C00EFAE6B /* SignInResponse.swift in Sources */,
 				A957520C2BDF7B4300E8EDA9 /* InboxViewModel.swift in Sources */,
+				A98395332BE7E8F8007315BC /* NewTaskView.swift in Sources */,
 				A93211302BDEE1A600EFAE6B /* TodayView.swift in Sources */,
 				A932111B2BDE365100EFAE6B /* AuthService.swift in Sources */,
 				A95752132BDF7D0E00E8EDA9 /* MainNetworkManager.swift in Sources */,

@@ -9,8 +9,6 @@ import SwiftUI
 
 class InboxViewModel: ObservableObject {
     
-    @Published var inboxTasks = [Task]()
-    
     private var networkManager: MainNetworkManagerProtocol
     
     init(networkManager: MainNetworkManagerProtocol = MainNetworkManager.shared){
@@ -18,13 +16,5 @@ class InboxViewModel: ObservableObject {
     }
     
     
-    func getTask(projectId: String) {
-        networkManager.getTasks(projectId: projectId, sectionId: nil, filter: nil) { response in
-            print("Tasks", response)
-            self.inboxTasks = response
-        } onError: { error in
-            print(error.localizedDescription)
-        }
-
-    }
+    
 }

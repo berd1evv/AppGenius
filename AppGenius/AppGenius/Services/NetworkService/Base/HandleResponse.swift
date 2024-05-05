@@ -25,6 +25,7 @@ class HandleResponse: HandleResponseProtocol{
                 
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
+                decoder.dateDecodingStrategy = .formatted(DateFormatter.queryDate)
                 let decoded = try response.map(T.self, atKeyPath: nil, using: decoder, failsOnEmptyData: false)
                 onSuccess(decoded)
             } catch {

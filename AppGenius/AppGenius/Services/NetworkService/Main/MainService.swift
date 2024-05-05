@@ -12,6 +12,7 @@ import Alamofire
 
 enum MainService{
     case getProjects
+    case getSections(projectId: String)
     case getTasks(projectId: String?, sectionId: String?, filter: String?)
 }
 
@@ -23,13 +24,14 @@ extension MainService: TargetType{
     var path: String {
         switch self {
         case .getProjects: return "projects"
+        case .getSections: return "sections"
         case .getTasks: return "tasks"
         }
     }
     
     var method: Moya.Method {
         switch self{
-        case .getProjects, .getTasks: return .get
+        case .getProjects, .getSections, .getTasks: return .get
         }
     }
     
@@ -48,6 +50,9 @@ extension MainService: TargetType{
             if let filter = filter {
                 params["filter"] = filter
             }
+            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
+        case .getSections(let projectId):
+            let params = ["project_id" : projectId]
             return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
         default:
             return .requestPlain

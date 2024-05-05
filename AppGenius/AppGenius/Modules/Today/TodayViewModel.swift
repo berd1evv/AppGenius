@@ -9,6 +9,7 @@ import Foundation
 
 class TodayViewModel: ObservableObject {
     
+    @Published var overdueTasks = [Task]()
     @Published var todaysTasks = [Task]()
     
     private var networkManager: MainNetworkManagerProtocol
@@ -22,10 +23,18 @@ class TodayViewModel: ObservableObject {
     func getTasksForToday() {
         networkManager.getTasks(projectId: nil, sectionId: nil, filter: "today|overdue") { response in
             print("Tasks", response)
-            self.todaysTasks = response
+            self.overdueTasks = response.filter { !self.isDateToday($0.due?.date ?? Date())}
+            self.todaysTasks = response.filter { self.isDateToday($0.due?.date ?? Date())}
         } onError: { error in
             print(error.localizedDescription)
         }
 
+    }
+    
+    func isDateToday(_ date: Date) -> Bool {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        let otherDate = calendar.startOfDay(for: date)
+        return today == otherDate
     }
 }

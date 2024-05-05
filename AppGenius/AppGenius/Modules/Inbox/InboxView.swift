@@ -7,41 +7,37 @@
 
 import SwiftUI
 
-struct TodoItem: Identifiable {
-    var id = UUID()
-    var title: String
-    var description: String?
-    var isCompleted: Bool
-}
-
 struct InboxView: View {
     @StateObject var viewModel: InboxViewModel = InboxViewModel()
     @EnvironmentObject var appState: AppState
-
+    @State private var isNewTask: Bool = false
+    
     var body: some View {
-        List {
-            ForEach(viewModel.inboxTasks.indices, id: \.self) { index in
-                HStack {
-                    Image(systemName: "circle")
-                        .frame(width: 20, height: 20)
-                    VStack(alignment: .leading) {
-                        Text(viewModel.inboxTasks[index].content.cleanedText())
-                            .font(.headline)
-                        if !viewModel.inboxTasks[index].description.isEmpty {
-                            Text(viewModel.inboxTasks[index].description)
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
-                        }
-                    }
-                    Spacer()
+        ZStack(alignment: .bottomTrailing) {
+            List {
+                ForEach(appState.inboxTasks.indices, id: \.self) { index in
+                    TaskView(task: appState.inboxTasks[index])
                 }
             }
+            Button(action: {
+                isNewTask = true
+            }, label: {
+                ZStack {
+                    Circle()
+                    Image(systemName: "plus")
+                        .foregroundColor(.white)
+                }
+                
+            })
+            .frame(width: 50, height: 50, alignment: .bottomTrailing)
+            .padding()
         }
-        .onAppear {
-            if let project = appState.projects.first(where: { $0.isInbox}) {
-                viewModel.getTask(projectId: project.id)
-            }
-        }
+        .onChange(of: isNewTask, {
+            UIView.setAnimationsEnabled(false)
+        })
+        .fullScreenCover(isPresented: $isNewTask, content: {
+            NewTaskView(isPresented: $isNewTask)
+        })
         .navigationTitle("Inbox")
         .navigationBarTitleDisplayMode(.large)
     }

@@ -7,59 +7,94 @@
 
 import SwiftUI
 
-struct CustomDisclosureGroupStyle: DisclosureGroupStyle {
-    @State var showsDisclosureIndicator: Bool
-
-    func makeBody(configuration: Configuration) -> some View {
-        HStack {
-            configuration.label
-            if showsDisclosureIndicator {
-                Image(systemName: configuration.isExpanded ? "chevron.down" : "chevron.right")
-                    .onTapGesture {
-                        withAnimation {
-                            configuration.isExpanded.toggle()
-                        }
-                    }
-            }
-        }
-        .contentShape(Rectangle())
-//        .onTapGesture {
-//            withAnimation {
-//                configuration.isExpanded.toggle()
-//            }
-//        }
-    }
-}
-
 struct BrowseView: View {
     @EnvironmentObject var appState: AppState
-    var data = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"]
-    @State private var isExpanded = false
+    @State private var isExpanded = true
     @State private var buttonTapped = false
     @State private var selectedProject: Project = Project()
     @State private var showSettings = false
+    @State private var showManageProject = false
+    @State private var isNewTask: Bool = false
     
     var body: some View {
-        List {
-            
-            OutlineGroup(appState.projects, children: \.children) { project in
-                HStack {
-                    Image(systemName: "number")
-                    Text(project.name)
-                    Spacer()
-                }
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    selectedProject = project
-                    buttonTapped.toggle()
+        ZStack(alignment: .bottomTrailing) {
+            List {
+                Section(isExpanded: $isExpanded) {
+                    OutlineGroup(appState.projects, children: \.children) { project in
+                        HStack {
+                            Image(systemName: "number")
+                            Text(project.name)
+                            Spacer()
+                        }
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            selectedProject = project
+                            buttonTapped.toggle()
+                        }
+                    }
+                    
+                    HStack {
+                        Image(systemName: "pencil")
+                        Text("Manage projects")
+                    }
+                    .onTapGesture {
+                        showManageProject = true
+                    }
+                } header: {
+                    HStack {
+                        HStack {
+                            Text("My Projects")
+                                .font(.caption)
+                            Image(systemName: "chevron.right")
+                        }
+                        .onTapGesture {
+                            showManageProject = true
+                        }
+                        
+                        Spacer()
+                        Menu {
+                            VStack {
+                                Button {
+                                    
+                                } label: {
+                                    HStack {
+                                        VStack(alignment: .leading, spacing: 4) {
+                                            Text("Add Project")
+                                                .font(.headline)
+                                            Text("Plan and assign tasks")
+                                                .font(.subheadline)
+                                                .foregroundColor(.secondary)
+                                        }
+                                        Image(systemName: "number")
+                                    }
+                                }
+                            }
+                        } label: {
+                            Image(systemName: "plus")
+                        }
+                        Button {
+                            withAnimation {
+                                isExpanded.toggle()
+                            }
+                        } label: {
+                            Image(systemName: "chevron.right")
+                                .rotationEffect(.degrees(isExpanded ? 90 : 0))
+                        }
+                    }
                 }
             }
-            
-            HStack {
-                Image(systemName: "pencil")
-                Text("Manage projects")
-            }
-
+            Button(action: {
+                isNewTask = true
+            }, label: {
+                ZStack {
+                    Circle()
+                    Image(systemName: "plus")
+                        .foregroundColor(.white)
+                }
+                
+            })
+            .frame(width: 50, height: 50, alignment: .bottomTrailing)
+            .padding()
         }
         .navigationTitle("Browse")
         .navigationBarTitleDisplayMode(.inline)
@@ -72,6 +107,15 @@ struct BrowseView: View {
                 })
             }
         }
+        .onChange(of: isNewTask, {
+            UIView.setAnimationsEnabled(false)
+        })
+        .fullScreenCover(isPresented: $isNewTask, content: {
+            NewTaskView(isPresented: $isNewTask)
+        })
+        .sheet(isPresented: $showManageProject, content: {
+            ManageProjectView()
+        })
         .sheet(isPresented: $showSettings, content: {
             SettingsView()
         })
@@ -79,8 +123,4 @@ struct BrowseView: View {
             ProjectView(project: selectedProject)
         }
     }
-}
-
-#Preview {
-    BrowseView()
 }

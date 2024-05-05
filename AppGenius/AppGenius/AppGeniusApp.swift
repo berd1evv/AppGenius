@@ -13,6 +13,16 @@ struct AppGeniusApp: App {
     @AppStorage(UserDefaultsStorage.userToken) private var userToken = ""
     @StateObject private var appState: AppState = AppState()
     
+    init() {
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.configureWithDefaultBackground()
+        tabBarAppearance.backgroundColor = .white
+        UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+        UITabBar.appearance().standardAppearance = tabBarAppearance
+        UITabBar.appearance().barTintColor = .clear
+        UITabBar.appearance().isTranslucent = true
+    }
+    
     var body: some Scene {
         WindowGroup {
             if userToken.isEmpty {
