@@ -11,3 +11,5 @@ My application is written in MVVM (Model-View-ViewModel). It has three tabs. Tod
   <img src="https://github.com/berd1evv/AppGenius/blob/master/AppGenius/AppGenius/Photos/browse.png?raw=true" width="128"/>
   <img src="https://github.com/berd1evv/AppGenius/blob/master/AppGenius/AppGenius/Photos/project_detail.png?raw=true" width="128"/>
 </p>
+
+All data from the app are received from your account in ToDoIst
