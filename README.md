@@ -13,3 +13,7 @@ My application is written in MVVM (Model-View-ViewModel). It has three tabs. Tod
 </p>
 
 All data from the app are received from your account in ToDoIst
+
+https://drive.google.com/drive/folders/1g9__kN3jxvnSxnqwIWd3vswgxfUWc1jV?usp=share_link
+<br>
+here is the link for the video presentation of the app
