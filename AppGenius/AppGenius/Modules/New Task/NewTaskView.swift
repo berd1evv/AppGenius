@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct NewTaskView: View {
+    @EnvironmentObject var appState: AppState
     @Binding var isPresented: Bool
     @FocusState var isFocused: Bool
+    @State private var content: String = ""
+    @State private var description: String = ""
+    
     var body: some View {
         ZStack {
             Rectangle()
@@ -24,13 +28,17 @@ struct NewTaskView: View {
             VStack {
                 Spacer()
                 VStack {
-                    TextField("e.g., Renew gym every may 1", text: .constant(""))
+                    TextField("e.g., Renew gym every may 1", text: $content)
                         .focused($isFocused)
-                    TextField("Description", text: .constant(""))
+                    TextField("Description", text: $description)
                     HStack {
                         Spacer()
                         Button(action: {
-                            
+                            appState.createTask(content: content, description: description) {
+                                withAnimation {
+                                    isPresented = false
+                                }
+                            }
                         }, label: {
                             Text("Create")
                         })

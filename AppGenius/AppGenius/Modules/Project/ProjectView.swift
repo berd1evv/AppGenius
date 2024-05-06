@@ -61,8 +61,10 @@ struct TaskView: View {
                 if let due = task.due {
                     Text(due.string)
                         .font(.subheadline)
+                        .foregroundStyle(!due.date.isPastDate() ? .black : .red)
                 }
             }
+            .contentShape(Rectangle())
             Spacer()
         }
     }

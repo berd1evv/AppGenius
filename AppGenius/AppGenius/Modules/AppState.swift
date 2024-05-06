@@ -11,6 +11,7 @@ class AppState: ObservableObject {
     
     @Published var projects = [Project]()
     @Published var inboxTasks = [Task]()
+    @Published var inboxTaskId = ""
     
     private var networkManager: MainNetworkManagerProtocol
     
@@ -21,9 +22,28 @@ class AppState: ObservableObject {
     func getProjects() {
         networkManager.getProjects { response in
             if let project = response.first(where: { $0.isInbox}) {
+                self.inboxTaskId = project.id
                 self.getInboxTask(projectId: project.id)
             }
-            self.projects = self.makeHierarchy(from: response).filter { !$0.isInbox}
+            self.projects = self.makeHierarchy(from: response)
+        } onError: { error in
+            print(error.localizedDescription)
+        }
+
+    }
+    
+    func createTask(content: String, description: String?, projectId: String? = nil, completion: @escaping () -> ()) {
+        var id: String? = nil
+        if projectId == nil {
+            id = inboxTaskId
+        } else {
+            id = projectId
+        }
+        networkManager.createTask(content: content, description: description, projectId: id) { task in
+            if self.inboxTaskId == task.projectId {
+                self.inboxTasks.append(task)
+            }
+            completion()
         } onError: { error in
             print(error.localizedDescription)
         }

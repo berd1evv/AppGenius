@@ -14,6 +14,7 @@ enum MainService{
     case getProjects
     case getSections(projectId: String)
     case getTasks(projectId: String?, sectionId: String?, filter: String?)
+    case createTask(content: String, description: String?, projectId: String?)
 }
 
 extension MainService: TargetType{
@@ -26,12 +27,14 @@ extension MainService: TargetType{
         case .getProjects: return "projects"
         case .getSections: return "sections"
         case .getTasks: return "tasks"
+        case .createTask: return "tasks"
         }
     }
     
     var method: Moya.Method {
         switch self{
         case .getProjects, .getSections, .getTasks: return .get
+        case .createTask: return .post
         }
     }
     
@@ -54,6 +57,17 @@ extension MainService: TargetType{
         case .getSections(let projectId):
             let params = ["project_id" : projectId]
             return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
+        case .createTask(let content, let description, let projectId):
+            var params: [String:Any] = [
+                "content" : content
+            ]
+            if let description = description {
+                params["description"] = description
+            }
+            if let projectId = projectId {
+                params["project_id"] = projectId
+            }
+            return .requestParameters(parameters: params, encoding: JSONEncoding.default)
         default:
             return .requestPlain
         }

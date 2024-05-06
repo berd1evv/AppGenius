@@ -13,6 +13,7 @@ protocol MainNetworkManagerProtocol{
     func getProjects(onSuccess: @escaping ([Project]) -> Void, onError: @escaping (APIError) -> Void)
     func getSections(projectId: String, onSuccess: @escaping ([Sections]) -> Void, onError: @escaping (APIError) -> Void)
     func getTasks(projectId: String?, sectionId: String?, filter: String?, onSuccess: @escaping ([Task]) -> Void, onError: @escaping (APIError) -> Void)
+    func createTask(content: String, description: String?, projectId: String?, onSuccess: @escaping (Task) -> Void, onError: @escaping (APIError) -> Void)
 }
 
 class MainNetworkManager{
@@ -41,6 +42,12 @@ extension MainNetworkManager: MainNetworkManagerProtocol{
     
     func getTasks(projectId: String?, sectionId: String?, filter: String?, onSuccess: @escaping ([Task]) -> Void, onError: @escaping (APIError) -> Void) {
         provider.request(.getTasks(projectId: projectId, sectionId: sectionId, filter: filter)) { result in
+            self.handleResponse.handleResponse(result: result, onSuccess: onSuccess, onError: onError)
+        }
+    }
+    
+    func createTask(content: String, description: String?, projectId: String?, onSuccess: @escaping (Task) -> Void, onError: @escaping (APIError) -> Void) {
+        provider.request(.createTask(content: content, description: description, projectId: projectId)) { result in
             self.handleResponse.handleResponse(result: result, onSuccess: onSuccess, onError: onError)
         }
     }

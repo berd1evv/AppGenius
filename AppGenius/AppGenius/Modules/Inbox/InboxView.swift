@@ -18,6 +18,7 @@ struct InboxView: View {
                 ForEach(appState.inboxTasks.indices, id: \.self) { index in
                     TaskView(task: appState.inboxTasks[index])
                 }
+                .onDelete {appState.inboxTasks.remove(atOffsets: $0)}
             }
             Button(action: {
                 isNewTask = true

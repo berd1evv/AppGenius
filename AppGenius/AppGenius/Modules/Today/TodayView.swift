@@ -25,6 +25,8 @@ struct TodayView: View {
                                 editTask = true
                             }
                     }
+                    .onDelete {
+                        viewModel.overdueTasks.remove(atOffsets: $0)}
                 }
                 Section("Today") {
                     ForEach(viewModel.todaysTasks.indices, id: \.self) { index in
@@ -34,6 +36,8 @@ struct TodayView: View {
                                 editTask = true
                             }
                     }
+                    .onDelete {
+                        viewModel.todaysTasks.remove(atOffsets: $0)}
                 }
             }
             Button(action: {
@@ -57,7 +61,7 @@ struct TodayView: View {
             NewTaskView(isPresented: $isNewTask)
         })
         .sheet(isPresented: $editTask, content: {
-            EditTaskView(task: selectedTask)
+            EditTaskView(task: $selectedTask)
                 .presentationDragIndicator(.visible)
                 .presentationDetents([.medium, .large])
         })

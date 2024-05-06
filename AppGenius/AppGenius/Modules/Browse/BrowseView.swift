@@ -20,7 +20,7 @@ struct BrowseView: View {
         ZStack(alignment: .bottomTrailing) {
             List {
                 Section(isExpanded: $isExpanded) {
-                    OutlineGroup(appState.projects, children: \.children) { project in
+                    OutlineGroup(appState.projects.filter { !$0.isInbox}, children: \.children) { project in
                         HStack {
                             Image(systemName: "number")
                             Text(project.name)

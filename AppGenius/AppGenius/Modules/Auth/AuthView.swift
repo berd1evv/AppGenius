@@ -25,7 +25,7 @@ struct AuthView: View {
                 WebKitView(dismiss: {
                     showWebView = false
                     viewModel.signIn()
-                }, url: "https://todoist.com/oauth/authorize?client_id=124481347ddb4a5499caea8c9b035384&scope=data:read,data:delete&state=secretstring")
+                }, url: "https://todoist.com/oauth/authorize?client_id=124481347ddb4a5499caea8c9b035384&scope=data:read,data:delete,data:read_write&state=secretstring")
             })
             .navigationDestination(isPresented: $viewModel.isSuccess) {
                 ContentView()

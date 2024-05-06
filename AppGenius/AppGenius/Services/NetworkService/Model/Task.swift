@@ -21,6 +21,7 @@ struct Task: Codable, Identifiable, Hashable{
     var isCompleted: Bool
     let sectionId: String?
     let parentId: String?
+    let projectId: String?
     let due: Due?
     
     
@@ -30,6 +31,7 @@ struct Task: Codable, Identifiable, Hashable{
         case isCompleted = "is_completed"
         case sectionId = "section_id"
         case parentId = "parent_id"
+        case projectId = "project_id"
         case due
     }
     
@@ -43,6 +45,7 @@ struct Task: Codable, Identifiable, Hashable{
         isCompleted = try values.decode(Bool.self, forKey: .isCompleted)
         sectionId = try values.decodeIfPresent(String.self, forKey: .sectionId)
         parentId = try values.decodeIfPresent(String.self, forKey: .parentId)
+        projectId = try values.decodeIfPresent(String.self, forKey: .projectId)
         due = try values.decodeIfPresent(Due.self, forKey: .due)
     }
     
@@ -55,6 +58,7 @@ struct Task: Codable, Identifiable, Hashable{
         isCompleted = false
         sectionId = nil
         parentId = nil
+        projectId = nil
         due = nil
     }
 }
